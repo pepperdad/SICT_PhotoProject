@@ -91,6 +91,8 @@ lbl1.pack()
 # 결과 frame
 label3 = tkinter.Label(frame5, text="잠시만 기다려주세요", font=("system", 20))
 label3.pack()
+
+# 출력할 매수 입력받기
 canvas1 = tkinter.Canvas(frame5, width=200, height=150)
 canvas1.pack()
 
@@ -98,17 +100,17 @@ entry1 = tkinter.Entry(frame5)
 canvas1.create_window(100, 90, window=entry1)
 
 
-def getSquareRoot():
+def getPrintImage():
     x1 = entry1.get()
 
     label1 = tkinter.Label(frame5, text=x1)
     canvas1.create_window(100, 150, window=label1)
 
 
-button1 = tkinter.Button(frame5, text="출력하기", command=getSquareRoot)
+button1 = tkinter.Button(frame5, text="출력하기", command=getPrintImage)
 canvas1.create_window(100, 120, window=button1)
 
-# 윈도우는 이거 있어야함?
+# 윈도우는 이거 있어야하는듯
 # cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
 print("스융네컷 가즈아")
