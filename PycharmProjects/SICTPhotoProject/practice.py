@@ -26,11 +26,14 @@ frame5.grid(row=0, column=0, sticky="nsew")
 
 
 def openFrame(frame):
+    # main frame
     if frame == main_frame:
         frame.tkraise()
+    # 촬영 frame
     if frame == frame1 or frame == frame2 or frame == frame3 or frame == frame4:
-        frame.tkraise()
+        # frame.tkraise()
         video_play()
+    # 출력 frame
     if frame == frame5:
         global result_image
         result_image = tkinter.PhotoImage(
@@ -80,14 +83,30 @@ back_btn = tkinter.Button(
 back_btn.pack()
 dam_frame_label = tkinter.Label(frame1, image=dam_frame)
 dam_frame_label.pack(side="right")
-# frm = tkinter.Frame(frame1, bg="white", width=720, height=480)  # 프레임 너비, 높이 설정
-# frm.pack(side="left")  # 격자 행, 열 배치
-# lbl1 = tkinter.Label(frm)
-# lbl1.pack()
+frm = tkinter.Frame(frame1, bg="white", width=720, height=480)  # 프레임 너비, 높이 설정
+frm.pack(side="left")  # 격자 행, 열 배치
+lbl1 = tkinter.Label(frm)
+lbl1.pack()
 
 # 결과 frame
 label3 = tkinter.Label(frame5, text="잠시만 기다려주세요", font=("system", 20))
 label3.pack()
+canvas1 = tkinter.Canvas(frame5, width=200, height=150)
+canvas1.pack()
+
+entry1 = tkinter.Entry(frame5)
+canvas1.create_window(100, 90, window=entry1)
+
+
+def getSquareRoot():
+    x1 = entry1.get()
+
+    label1 = tkinter.Label(frame5, text=x1)
+    canvas1.create_window(100, 150, window=label1)
+
+
+button1 = tkinter.Button(frame5, text="출력하기", command=getSquareRoot)
+canvas1.create_window(100, 120, window=button1)
 
 # 윈도우는 이거 있어야함?
 # cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
@@ -102,21 +121,19 @@ print("스융네컷 가즈아")
 
 def video_play():  # frame1 자리 변수로 만들기
     # 동영상 프레임
-    video_frm = tkinter.Frame(
-        frame1, bg="white", width=720, height=480
-    )  # 프레임 너비, 높이 설정
-    video_frm.pack(side="left")  # 격자 행, 열 배치
+    video_frm = tkinter.Frame(frame1, bg="white", width=2000, height=1500)  # 프레임 너비, 높이 설정
+    video_frm.pack()
     video_label = tkinter.Label(video_frm)
     video_label.pack()
     # frame1.tkraise()
 
     cap = cv2.VideoCapture(0)
     # time.sleep(2)
-    cap.set(3, 600)
-    cap.set(4, 500)
+    cap.set(3, 720)
+    cap.set(4, 1080)
     fc = 20.0
     codec = cv2.VideoWriter_fourcc("D", "I", "V", "X")
-    out = cv2.VideoWriter("mycam.avi", codec, fc, (int(cap.get(3)), int(cap.get(4))))
+    out = cv2.VideoWriter("mycam.avi", codec, fc, (int(cap.get(6)), int(cap.get(8))))
 
     n = 1
     while True:
@@ -129,7 +146,9 @@ def video_play():  # frame1 자리 변수로 만들기
             break  # while문을 빠져나가기
 
         out.write(frame)
+        cv2.resizeWindow("enhanced", 2000, 1500)
         cv2.imshow("frame", frame)
+
         # cv2.imshow("frame", video_label)
         k = cv2.waitKey(5)
         # frame1.tkraise()
