@@ -13,6 +13,7 @@
 ## 🛠 언어 및 프레임워크
 - Develop : Python
 - Design : 
+![IMG_6082](https://github.com/pepperdad/SICT_PhotoProject/assets/58854041/1a1132cd-604c-43e1-ae27-95c99a941aaf)
 
 
 <br><br>
